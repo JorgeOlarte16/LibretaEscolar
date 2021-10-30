@@ -17,19 +17,22 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
 
-        if(!session()->has('LoggedDocente') &&($request->path() !='auth/login' && $request->path() !='auth/register')){
-            return redirect('auth/login')->with('fail', 'Debes iniciar sesion');
-        }
-        if(session()->has('LoggedDocente') && ($request->path() == 'auth/login' || $request->path() == 'auth/register')){
-            return back();
-        }
-        if(!session()->has('LoggedAcudiente') &&($request->path() !='auth/login' && $request->path() !='auth/register')){
-            return redirect('auth/login')->with('fail', 'Debes iniciar sesion');
-        }
-        if(session()->has('LoggedAcudiente') && ($request->path() == 'auth/login' || $request->path() == 'auth/register')){
-            return back();
-        }
 
+        if($request->url() == 'auth/logindocente'){
+        if(!session()->has('LoggedDocente') &&($request->path() !='auth/logindocente' && $request->path() !='auth/registerdocente')){
+            return redirect('auth/logindocente')->with('fail', 'Debes iniciar sesion');
+        }
+        if(session()->has('LoggedDocente') && ($request->path() == 'auth/logindocente' || $request->path() == 'auth/registerdocente')){
+            return back();
+        }}
+
+        if($request->url() == 'auth/loginacudiente'){
+        if(!session()->has('LoggedAcudiente') &&($request->path() !='auth/loginacudiente' && $request->path() !='auth/registeracudiente')){
+            return redirect('auth/loginacudiente')->with('fail', 'Debes iniciar sesion');
+        }
+        if(session()->has('LoggedAcudiente') && ($request->path() == 'auth/loginacudiente' || $request->path() == 'auth/registeracudiente')){
+            return back();
+        }}
 
 
         return $next($request)->header('Cache-Control','no-cache, no-store, max-age=0, must-revalidate')
