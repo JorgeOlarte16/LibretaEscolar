@@ -36,7 +36,13 @@ class AnuncioController extends Controller
 
     public function store(Request $request){
         $anuncio = new Anuncio();
-        $data = ['LoggedUserInfo'=>Docentes::where('id', '=', session('LoggedUser'))->first()];
+
+        if(session('LoggedAcudiente')){
+            $data = ['LoggedUserInfo'=>Acudiente::where('id', '=', session('LoggedAcudiente'))->first()];
+        }else if(session('LoggedDocente')){
+            $data = ['LoggedUserInfo'=>Docentes::where('id', '=', session('LoggedDocente'))->first()];
+        }
+        
         $anuncio->titulo = $request->titulo;
         $anuncio->body = $request ->body;
         $anuncio->usuario = $data['LoggedUserInfo']-> usuario;
