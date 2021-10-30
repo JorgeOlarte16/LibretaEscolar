@@ -6,6 +6,7 @@ use App\Models\Acudiente;
 use Illuminate\Http\Request;
 use App\Models\Docentes;
 use App\Models\Usuario;
+use App\Models\Estudiante;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -152,5 +153,66 @@ class AdminController extends Controller
 
         return redirect()->route('show.docentes');
     }
+
+
+
+    function register_estudiante(){
+        return view('admin.register_estudiante');
+     
+    }
+
+    function save_estudiante(Request $request){
+        //validar request
+        $request->validate([
+            'nombre'=>'required',
+            'curso'=>'required',
+            'id_acudiente'=>'required'
+            
+        ]);
+
+        $estudiante = new estudiante;
+
+        $estudiante->nombre = $request->nombre;
+        $estudiante->curso = $request->curso;
+        $estudiante->id_acudiente = $request->id_acudiente;
+        $save = $estudiante->save();
+
+        if($save){
+            return back()->with('success', 'Se ha registrado correctamente al docente');
+        }else{
+            return back()->with('fail', 'Algo salio mal');
+        }
+    }
+
+    public function show_estudiantes(){
+        $estudiantes = Estudiante::orderBy('nombre', 'desc')->paginate();
+
+        return view('admin.estudiantes', compact('estudiantes'));
+    }
+
+    public function edit_estudiante(Estudiante $estudiante){
+        return view('admin.edit_estudiante', compact('estudiante'));
+    }
+
+    public function update_estudiante(Request $request, Estudiante $estudiante){
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'usuario' => 'required'
+        ]);
+
+        $estudiante->update($request->all());
+
+        return redirect()->route('show.acudientes');
+    }
+
+    public function destroy_estudiante(estudiante $estudiante){
+
+        $estudiante->delete();
+
+        return redirect()->route('show.estudiante');
+    }
+
+
 
 }

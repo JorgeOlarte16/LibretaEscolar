@@ -17,7 +17,7 @@ class CreateActividadesTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->longText('descripcion')->nullable();
-            $table->integer('curso');
+            $table->string('curso');
             $table->string('file_name')->nullable();
             $table->string('file_path')->nullable();
             $table->date('fecha_entrega')->nullable();          

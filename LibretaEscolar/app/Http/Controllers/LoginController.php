@@ -28,7 +28,7 @@ class LoginController extends Controller
             return back()->with('fail', 'No se encuentra el usuario ingresado');
         }else{
             if(Hash::check($request->contraseña, $userInfo->contraseña)){
-                $request ->session()->put('LoggedUser', $userInfo->id);
+                $request ->session()->put('LoggedDocente', $userInfo->id);
                 return redirect('anuncios/show');
             }else{
                 return back()->with('fail', 'Contraseña incorrecta');
@@ -46,14 +46,14 @@ class LoginController extends Controller
             'contraseña'=>'required'
         ]);
 
-        $userInfo = Usuario::where([['usuario', '=', $request->usuario], ['tipousuario', '=', 'acudiente']])->first();
-
+        $userInfo = Acudiente::where('usuario', '=', $request->usuario)->first();
+        
         if(!$userInfo){
             return back()->with('fail', 'No se encuentra el usuario ingresado');
         }else{
             if(Hash::check($request->contraseña, $userInfo->contraseña)){
-                $request ->session()->put('LoggedUser', $userInfo->id);
-                return redirect('anuncios.show');
+                $request ->session()->put('LoggedAcudiente', $userInfo->id);
+                return redirect('acudientes/preview');
             }else{
                 return back()->with('fail', 'Contraseña incorrecta');
             }
@@ -85,12 +85,16 @@ class LoginController extends Controller
     }
 
     function logout(){
-        if(session()->has('LoggedUser')){
-            session()->pull('LoggedUser');
-            return redirect('/');
-        }
         if(session()->has('LoggedAdmin')){
             session()->pull('LoggedAdmin');
+            return redirect('/');
+        }
+        if(session()->has('LoggedAcudiente')){
+            session()->pull('LoggedAcudiente');
+            return redirect('/');
+        }
+        if(session()->has('LoggedDocente')){
+            session()->pull('LoggedDcudiente');
             return redirect('/');
         }
     }

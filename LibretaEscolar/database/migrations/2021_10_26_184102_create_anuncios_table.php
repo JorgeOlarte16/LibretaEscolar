@@ -19,7 +19,7 @@ class CreateAnunciosTable extends Migration
             $table->longText('body'); 
             $table->timestamps();
             $table->string('usuario')->nullable();
-            $table->integer('curso');
+            $table->string('curso');
         });
     }
 

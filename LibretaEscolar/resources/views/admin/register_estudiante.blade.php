@@ -1,18 +1,25 @@
 @extends('layouts.plantilla')
-
-@section('title', 'Editar cursos')
+@section('title', 'registrar')
 
 @section('content')
-    <h1>Editar docente</h1>
 
+    <h1>Registrar</h1>
+
+    <a href="{{route('show.estudiantes')}}">Volver a estudiantes</a>
+    <form action="{{route('admin.save_estudiante')}}" method="POST">
+
+    @if (Session::get('success'))
+        {{Session::get('succes')}}
+    @endif
+    @if (Session::get('fail'))
+        {{Session::get('fail')}}
+    @endif
+    @csrf
     
-    <form action="{{route('admin.update_docente', $docente)}}" method="POST">
-        @csrf
-        @method('put')
         <label>
-            Nombre:
+            Nombre
             <br>
-            <input type="text" name="nombre" value="{{old('nombre', $docente->nombre)}}">
+            <input type="text" name="nombre" placeholder="Ingrese nombre" value="{{old('nombre')}}">
         </label>
         @error('nombre')
             <br>
@@ -20,8 +27,10 @@
             <br>         
         @enderror
         <br>
+        <br>
+        
         <label>
-            Curso:
+            Curso
             <br>
             <select name="curso" id="curso">
 
@@ -37,21 +46,20 @@
 
             </select>
         </label>
-
         @error('curso')
             <br>
             <small>*{{$message}}</small>
             <br>         
         @enderror
-
+        <br>
         <br>
         <label>
-            Usuario:
+            ID acudiente
             <br>
-            <input name="usuario" value="{{old('usuario',$docente->usuario)}}">
+            <input type="text" name="id_acudiente" placeholder="Ingrese ID del acudiente" value="{{old('id_acudiente')}}">
+        
         </label>
-
-        @error('usuario')
+        @error('ID acudiente')
             <br>
             <small>*{{$message}}</small>
             <br>         
@@ -59,7 +67,7 @@
 
         <br>
         <br>
-        
-        <button type="submit">Actualizar docente</button>
+
+        <button type="submit">Registrar</button>
     </form>
 @endsection

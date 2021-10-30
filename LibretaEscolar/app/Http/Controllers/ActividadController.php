@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\actividad;
 use App\Models\Usuario;
 use App\Models\Docentes;
+use App\Models\Acudiente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +13,11 @@ class ActividadController extends Controller
 {
     public function show(){
         $actividades = actividad::orderBy('created_at', 'desc')->get();
-        $data = ['LoggedUserInfo'=>Usuario::where('id', '=', session('LoggedUser'))->first()];
+        if(session('LoggedAcudiente')){
+            $data = ['LoggedUserInfo'=>Acudiente::where('id', '=', session('LoggedAcudiente'))->first()];
+        }else if(session('LoggedDocente')){
+            $data = ['LoggedUserInfo'=>Docentes::where('id', '=', session('LoggedDocente'))->first()];
+        }
         return view('actividades.show', $data, compact('actividades'));
     }
 

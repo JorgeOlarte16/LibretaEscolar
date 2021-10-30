@@ -3,7 +3,6 @@
     
 @section('content')
     <h1>Tablon de actividades</h1>
-    <a href="">Crear actividad</a>
     <br>
     <table>
         <thead>
@@ -27,7 +26,6 @@
     <a href="{{route('actividades.create')}}">Nueva actividad</a>
     @endif
 
-    <a href="{{route('actividades.create')}}">Nueva actividad</a>
 
     @foreach ($actividades as $actividad)
 

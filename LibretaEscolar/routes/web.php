@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AnuncioController;
+use App\Http\Controllers\AcudienteController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Log;
 
@@ -39,9 +40,11 @@ Route::group(['middleware'=>['AuthCheck']],function(){
     Route::get('/actividades/create', [ActividadController::class, 'create'])->name('actividades.create');
     Route::post('/actividades/store', [ActividadController::class, 'store'])->name('actividades.store');
     Route::get('/actividades/download{file}', [ActividadController::class, 'download'])->name('actividades.download');
-        
+    Route::get('/acudientes/preview',[AcudienteController::class,'show_estudiantes'])->name('acudientes.preview');
 });
 
+/* Route::group(['middleware'=>['AuthCheckAcudiente']], function(){ */
+/* }); */
 
 Route::group(['middleware'=>['AuthCheckAdmin']], function(){
     Route::view('/admin', 'admin.register')->name('admin');
@@ -57,4 +60,12 @@ Route::group(['middleware'=>['AuthCheckAdmin']], function(){
     Route::get('/admin/edit_docente/{docente}', [AdminController::class, 'edit_docente' ]) ->name('admin.edit_docente');
     Route::put('/admin/docentes/{docente}', [AdminController::class, 'update_docente' ]) ->name('admin.update_docente');
     Route::delete('/admin/docentes/{docente}', [AdminController::class, 'destroy_docente' ]) ->name('admin.destroy_docente');
+
+    Route::get('/admin/estudiantes', [AdminController::class, 'show_estudiantes' ]) ->name('show.estudiantes');
+    Route::get('/admin/register_estudiante', [AdminController::class, 'register_estudiante' ]) ->name('admin.register_estudiante');
+    Route::post('/admin/save_estudiante', [AdminController::class, 'save_estudiante']) ->name('admin.save_estudiante');
+    Route::get('/admin/edit_estudiantes/{estudiante}', [AdminController::class, 'edit_estudiante' ]) ->name('admin.edit_estudiante');
+    Route::put('/admin/estudiantes/{estuadiante}', [AdminController::class, 'update_estudiante' ]) ->name('admin.update_estudiante');
+    Route::delete('/admin/estudiantes/{estudiante}', [AdminController::class, 'destroy_estudiante' ]) ->name('admin.destroy_estudiante');
+
 });

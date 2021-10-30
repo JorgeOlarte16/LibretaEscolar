@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AuthCheckDocente
+class AuthCheckAcudiente
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,15 @@ class AuthCheckDocente
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!session()->has('LoggedDocente') &&($request->path() !='auth/login' && $request->path() !='auth/register')){
+        if(!session()->has('LoggedAcudiente') &&($request->path() !='auth/login' && $request->path() !='auth/register')){
             return redirect('auth/login')->with('fail', 'Debes iniciar sesion');
         }
-        if(session()->has('LoggedDcente') && ($request->path() == 'auth/login' || $request->path() == 'auth/register')){
+        if(session()->has('LoggedAcudiente') && ($request->path() == 'auth/login' || $request->path() == 'auth/register')){
             return back();
         }
         return $next($request)->header('Cache-Control','no-cache, no-store, max-age=0, must-revalidate')
                               ->header('Pragma','no-cache')
                               ->header('Expires','Sat 01 Jan 1990 00:00:00 GMT');;
     }
+    
 }

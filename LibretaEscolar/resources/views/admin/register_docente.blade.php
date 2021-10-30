@@ -33,7 +33,19 @@
         <label>
             Curso
             <br>
-            <input type="text" name="curso" placeholder="Ingrese curso" value="{{old('curso')}}">
+            <select name="curso" id="curso">
+
+                <option value="preescolar">preescolar</option>
+                <option value="prejardin">prejardin</option>
+                <option value="jardin">jardin</option>
+                <option value="transicion">transicion</option>
+                <option value="primero">primero</option>
+                <option value="segundo">segundo</option>
+                <option value="tercero">tercero</option>
+                <option value="cuarto">cuarto</option>
+                <option value="quinto">quinto</option>
+
+            </select>
         </label>
         @error('curso')
             <br>
