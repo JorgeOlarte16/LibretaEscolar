@@ -10,7 +10,7 @@ use App\Models\Docentes;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller    #Creacion de la clase LoginController que contendra los metodos para el inicio de sesion
+class LoginController extends Controller    #Creacion de la clase LoginController que contendra los metodos para el inicio de sesion--- Cristian Moreno Peña
 {
     function login_docente(){       #Funcion que devuelve el formulario de inicio de sesion para docentes
         return view('auth.logindocente');

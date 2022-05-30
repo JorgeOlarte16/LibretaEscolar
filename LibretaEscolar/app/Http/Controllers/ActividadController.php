@@ -10,7 +10,7 @@ use App\Models\entrega;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ActividadController extends Controller #Creacion de la clase ActividadController que contendra los metodos de la clase Actividad
+class ActividadController extends Controller #Creacion de la clase ActividadController que contendra los metodos de la clase Actividad---Jorge Olarte Alean
 {
     public function show(string $curso){        #Funcion que se encarga de mostrar las actividades de un curso recibiendo su ID
         $actividades = actividad::orderBy('created_at', 'desc')->get();

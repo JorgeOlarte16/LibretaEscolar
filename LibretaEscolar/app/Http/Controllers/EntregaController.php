@@ -8,7 +8,7 @@ use App\Models\Acudiente;
 use App\Models\entrega;
 use Illuminate\Http\Request;
 
-class EntregaController extends Controller #Creacion de la clase EntregaController que contendra los metodos de la clase Entrega
+class EntregaController extends Controller #Creacion de la clase EntregaController que contendra los metodos de la clase Entrega--- Alejandro Botero Angarita
 {
     public function show(string $curso, int $id){      #Funcion que se encarga de mostrar las entregas de un curso recibiendo su ID
         $entregas = entrega::orderBy('created_at', 'desc')->get();

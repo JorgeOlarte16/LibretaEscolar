@@ -9,7 +9,7 @@ use App\Models\estudiante;
 use App\Models\Docentes;
 use Illuminate\Http\Request;
 
-class ReporteController extends Controller      #Creacion de la clase ReporteController que contendra los metodos de los reportes
+class ReporteController extends Controller      #Creacion de la clase ReporteController que contendra los metodos de los reportes--- Mario Portacio Aparicio
 {
     public function show_docentes(string $curso){       #Funcion que crea y muestra el reporte de notas del curso del docente
 
@@ -18,7 +18,7 @@ class ReporteController extends Controller      #Creacion de la clase ReporteCon
            $estudiantes = Estudiante::where('curso', '=', $curso)->orderBy('id','asc')->get();
            $actividades = actividad::where('curso', '=', $curso)->orderBy('id','asc')->get();
            $entregas = entrega::where('curso', '=', $curso)->orderBy('id_acudiente','asc')->get();
-
+        
 
             $data = ['LoggedUserInfo'=>Docentes::where('id', '=', session('LoggedDocente'))->first(), 'curso'=>$curso];
 

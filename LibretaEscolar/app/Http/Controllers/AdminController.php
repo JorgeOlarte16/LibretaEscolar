@@ -9,7 +9,7 @@ use App\Models\Usuario;
 use App\Models\Estudiante;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller  #Creacion de la clase AdminController que contendra los metodos de la clase Admin
+class AdminController extends Controller  #Creacion de la clase AdminController que contendra los metodos de la clase Admin--- Jorge Olarte Alean
 {
     function register_docente(){   #Funcion que se encarga de mostrar el formulario de registro de docentes
         return view('admin.register_docente');

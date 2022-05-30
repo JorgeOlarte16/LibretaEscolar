@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Usuario;
 
-class AnuncioController extends Controller  #Creacion de la clase AnuncioController que contendra los metodos de la clase Anuncio
+class AnuncioController extends Controller  #Creacion de la clase AnuncioController que contendra los metodos de la clase Anuncio---Sylvana Alcala Briceño
 {
     public function acudiente(){    #Funcion para recuperar el nombre del acudiente que publico el anuncio
         return $this->belongsTo(Acudiente::class);
